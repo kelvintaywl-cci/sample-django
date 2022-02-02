@@ -9,13 +9,13 @@ jobs:
     docker:
       # Python runtime same as .python-version
       - image: cimg/python:3.8.12
-      steps:
-        - checkout
-        - python/install-packages:
+    steps:
+      - checkout
+      - python/install-packages:
           pkg-manager: poetry
-        - run:
-            name: Lint Python files
-            command: poetry run black --check .
+      - run:
+          name: Lint Python files
+          command: poetry run black --check .
 
   test:
     parallelism: 1
@@ -29,23 +29,24 @@ jobs:
           # Passwords should not be commited like this ideally,
           # however, this is for a test DB
           POSTGRES_PASSWORD: 'unchained!'
-      steps:
-        - checkout
-        - python/install-packages:
+    steps:
+      - checkout
+      - python/install-packages:
           pkg-manager: poetry
-        - run:
-            name: Confirm DB is up and ready
-            command: |
-              dockerize -wait tcp://localhost:5432 -timeout 30s
-        - run:
-            name: Run tests
-            command: |
-              echo "TODO: update actual commands"
-              poetry run python manage.py check
+      - run:
+          name: Confirm DB is up and ready
+          command: |
+            dockerize -wait tcp://localhost:5432 -timeout 30s
+      - run:
+          name: Run tests
+          command: |
+            echo "TODO: update actual commands"
+            poetry run python manage.py check
 
 workflows:
   unchained:
     jobs:
       - lint
       - test:
-          requires: lint
+          requires:
+            - lint
