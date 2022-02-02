@@ -38,6 +38,10 @@ jobs:
           command: |
             dockerize -wait tcp://localhost:5432 -timeout 30s
       - run:
+          name: Run DB schema migrations
+          command: |
+            poetry run python manage.py migrate
+      - run:
           name: Run tests
           command: |
             echo "TODO: update actual commands"
