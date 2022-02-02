@@ -18,7 +18,7 @@ jobs:
           command: poetry run black --check .
 
   test:
-    parallelism: 1
+    parallelism: 2
     docker:
       # Python runtime same as .python-version
       - image: cimg/python:3.8.12
@@ -44,7 +44,16 @@ jobs:
       - run:
           name: Run tests
           command: |
-            poetry run python manage.py test
+            # get test files while ignoring __init__ files
+            TESTFILES=$(circleci tests glob "*/tests/*.py" | sed 's/\S\+__init__.py//g')
+            echo $TESTFILES | tr ' ' '\n' | sort | uniq > circleci_test_files.txt
+            cat circleci_test_files.txt
+            TESTFILES=$(circleci tests split --split-by=timings circleci_test_files.txt)
+            # massage filepaths into format manage.py test accepts
+            TESTFILES=$(echo $TESTFILES | tr "/" "." | sed 's/\.py//g')
+            echo $TESTFILES
+
+            poetry run python manage.py test --failfast $TESTFILES
 
 workflows:
   unchained:
