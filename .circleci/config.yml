@@ -19,6 +19,7 @@ jobs:
 
   test:
     parallelism: 2
+    resource_class: medium
     docker:
       # Python runtime same as .python-version
       - image: cimg/python:3.8.12
@@ -33,6 +34,8 @@ jobs:
       - checkout
       - python/install-packages:
           pkg-manager: poetry
+      # technically, no tests are interacting with the DB,
+      # so our DB setup is not strictly necessary.
       - run:
           name: Confirm DB is up and ready
           command: |
@@ -54,6 +57,9 @@ jobs:
             echo $TESTFILES
 
             poetry run python manage.py test --failfast $TESTFILES
+      # TODO: add junit reporter
+      - store_test_results:
+          path: www/junit.xml
 
 workflows:
   unchained:
