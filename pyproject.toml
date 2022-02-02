@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "sample-django"
+version = "0.1.0"
+description = "Sample Django project for testing CircleCI"
+authors = ["kelvintaywl <kelvintaywl@gmail.com>"]
+license = "Unlicense"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+Django = "^4.0.2"
+psycopg2 = "^2.9.3"
+
+[tool.poetry.dev-dependencies]
+black = "^22.1.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

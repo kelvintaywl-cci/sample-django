@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  db:
+    image: library/postgres:13
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: sample_django
+      POSTGRES_USER: django
+      POSTGRES_PASSWORD: 'unchained!'
