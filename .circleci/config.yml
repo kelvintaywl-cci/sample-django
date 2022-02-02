@@ -44,8 +44,7 @@ jobs:
       - run:
           name: Run tests
           command: |
-            echo "TODO: update actual commands"
-            poetry run python manage.py check
+            poetry run python manage.py test
 
 workflows:
   unchained:
