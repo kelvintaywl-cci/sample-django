@@ -53,7 +53,7 @@ jobs:
             cat circleci_test_files.txt
             TESTFILES=$(circleci tests split --split-by=timings circleci_test_files.txt)
             # massage filepaths into format manage.py test accepts
-            TESTFILES=$(echo $TESTFILES | tr "/" "." | sed 's/\.py//g')
+            TESTFILES=$(echo $TESTFILES | tr "/" "." | sed 's/\.py$//g')
             echo $TESTFILES
 
             poetry run python manage.py test --failfast $TESTFILES
