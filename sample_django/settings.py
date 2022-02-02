@@ -74,14 +74,14 @@ WSGI_APPLICATION = "sample_django.wsgi.application"
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('POSTGRES_NAME', 'sample_django'),
-        'USER': os.environ.get('POSTGRES_USER', 'django'),
-        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'unchained!'),
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.environ.get("POSTGRES_NAME", "sample_django"),
+        "USER": os.environ.get("POSTGRES_USER", "django"),
+        "PASSWORD": os.environ.get("POSTGRES_PASSWORD", "unchained!"),
         # custom env var
-        'HOST': os.environ.get('POSTGRES_DOCKER_HOST', 'localhost'),
-        'PORT': 5432,
+        "HOST": os.environ.get("POSTGRES_DOCKER_HOST", "localhost"),
+        "PORT": 5432,
     }
 }
 
