@@ -57,7 +57,7 @@ jobs:
             echo $TESTFILES
 
             poetry run python manage.py test --failfast $TESTFILES
-      # TODO: add junit reporter
+      # TODO: add junit reporter?
       - store_test_results:
           path: www/junit.xml
 
